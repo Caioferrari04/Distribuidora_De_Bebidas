@@ -1,0 +1,78 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Home Page";
+    var limite = Model.Count / 9;
+    var contador = 0;
+}
+
+<div class="text-center">
+    <a asp-action="Create">Criar novo usuário</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Data de Nascimento</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        @for (int i = 0; i < limite; i++)
+        {
+            var display = i == 0 ? "active" : "d-none";
+            <tbody id="@i" class="@display">
+                @for (int j = 0; j < 10 & contador < Model.Count; j++)
+                {
+                    <tr>
+                        <th scope="row">@Model[contador].Id</th>
+                        <td>@Model[contador].UserName</td>
+                        <td>@Model[contador].BirthDate</td>
+                        <td>
+                            <a asp-action="ReadSingle" class="btn btn-primary" asp-route-Id="@Model[contador].Id">Ver mais</a>
+                            <a asp-action="Update" class="btn btn-secondary" asp-route-Id="@Model[contador].Id">Atualizar</a>
+                            <a asp-action="Delete" class="btn btn-danger" asp-route-Id="@Model[contador].Id">Deletar</a>
+                        </td>
+                    </tr>
+                    contador++;
+                }
+            </tbody>
+        }
+    </table>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item">
+                <button type="button" class="page-link" id="Previous" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </button>
+            </li>
+            <li class="page-item">
+                <button type="button" class="page-link" id="Next" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+    var limit = @limite -1;
+    document.getElementById("Next").addEventListener("click", () => {
+        NextPage();
+    });
+    document.getElementById("Previous").addEventListener("click", () => {
+        PreviousPage();
+    });
+    function NextPage() {
+        var currentPage = document.getElementsByClassName("active");
+        var idPage = parseInt(currentPage[0].id);
+        var nexPage = document.getElementById(idPage == limit ? "0" : (idPage + 1).toString());
+        currentPage[0].className = "d-none";
+        nexPage.className = "active";
+    }
+    function PreviousPage() {
+        var currentPage = document.getElementsByClassName("active");
+        var idPage = parseInt(currentPage[0].id);
+        var previousPage = document.getElementById(idPage == "0" ? limit : (idPage - 1).toString());
+        currentPage[0].className = "d-none";
+        previousPage.className = "active";
+    }
+</script>

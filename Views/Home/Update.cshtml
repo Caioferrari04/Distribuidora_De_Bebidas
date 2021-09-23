@@ -1,0 +1,65 @@
+﻿@model DisplayModel
+<h2>Atualizar usuário</h2>
+<hr />
+<div class="row justify-content-center">
+    <form class="col-md-5" asp-action="Update">
+        <div class="row">
+            <div class="form-group mr-md-5">
+                <span class="text-danger" asp-validation-for="UserName"></span>
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <span class="text-danger" asp-validation-for="Password"></span>
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" value="@Model.Password" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mr-md-5">
+                <span class="text-danger" asp-validation-for="Email"></span>
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <span class="text-danger" asp-validation-for="BirthDate"></span>
+                <label asp-for="BirthDate" class="control-label"></label>
+                <input asp-for="BirthDate" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cep" class="control-label"></label>
+            <div class="input-group">
+                <input asp-for="Cep" class="form-control cep" />
+                <input asp-for="Id" class="form-control" disabled/>
+            </div>
+        </div>
+        @if(Model.Cpf == null) {
+            <div class="row" id="Pj">
+                <div class="form-group">
+                    <span class="text-danger" asp-validation-for="Cnpj"></span>
+                    <label asp-for="Cnpj" class="control-label"></label>
+                    <input asp-for="Cnpj" class="form-control cnpj" />
+                </div>
+            </div>          
+        }
+         else { 
+            <div class="row" id="Pf">
+                <div class="form-group mr-md-5">
+                    <span class="text-danger" asp-validation-for="Cpf"></span>
+                    <label asp-for="Cpf" class="control-label"></label>
+                    <input asp-for="Cpf" class="form-control cpf" />
+                </div>
+                <div class="form-group">
+                    <span class="text-danger" asp-validation-for="Rg"></span>
+                    <label asp-for="Rg" class="control-label"></label>
+                    <input asp-for="Rg" class="form-control rg" />
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" value="Atualizar!" />
+            <a class="btn btn-info" asp-action="Index">Voltar!</a>
+        </div>
+    </form>
+</div>

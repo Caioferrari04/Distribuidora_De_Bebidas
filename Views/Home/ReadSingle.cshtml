@@ -1,0 +1,34 @@
+﻿@model DisplayModel
+@{
+    ViewData["Title"] = Model.UserName;
+}
+
+<h2><b>@Html.DisplayNameFor(u => u.UserName)</b>: @Model.UserName</h2>
+<hr />
+
+<p><b>@Html.DisplayNameFor(u => u.Email)</b>: @Model.Email</p>
+<p><b>@Html.DisplayNameFor(u => u.Password)</b>: @Model.Password</p>
+<p><b>@Html.DisplayNameFor(u => u.BirthDate)</b>: @Html.DisplayFor(u => u.BirthDate)</p>
+<p><b>@Html.DisplayNameFor(u => u.Cep)</b>: @Model.Cep</p>
+
+@if (Model.Cnpj == null)
+{
+    <p><b>@Html.DisplayNameFor(u => u.Cpf)</b>: @Model.Cpf</p>
+    <p><b>@Html.DisplayNameFor(u => u.Rg)</b>: @Model.Rg</p>
+}
+else
+{
+    <p><b>@Html.DisplayNameFor(u => u.Cnpj)</b>: @Model.Cnpj</p>
+}
+
+<p><b>@Html.DisplayNameFor(u => u.Phones)</b>:</p>
+@foreach (string phoneNumber in Model.Phones)
+{
+    <p>@phoneNumber</p>
+}
+
+<p><b>@Html.DisplayNameFor(u => u.Addresses)</b>:</p>
+@foreach (string address in Model.Addresses)
+{
+    <p>@address</p>
+}
